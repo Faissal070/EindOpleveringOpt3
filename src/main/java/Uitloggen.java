@@ -8,12 +8,7 @@ public class Uitloggen extends UrenRegistratie {
     private LocalTime time2;
 
 
-    public LocalTime Kloksysteem() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Wat is je naam");
-        String naam = scanner.nextLine();
-        System.out.println("Wat is je code?");
-        int code = scanner.nextInt();
+    public LocalTime Kloksysteem(String naam, int code) {
         boolean check = false;
         for (int i = 0; i<Medewerker.medewerkerList.size(); i++) {
             if (Medewerker.medewerkerList.get(i).getNaam().equals(naam) && code == Medewerker.medewerkerList.get(i).getCode()) {
@@ -42,11 +37,14 @@ public class Uitloggen extends UrenRegistratie {
 
 
 
-
+    @Override
+    public void Uitloggen() {
+        super.Uitloggen();
+        Kloksysteem(super.naam,super.code);
+    }
 
 
     public Long VerschilTijd() {
-        Inloggen obj = new Inloggen();
         long minutesBetween = ChronoUnit.SECONDS.between(Inloggen.getTime(), time2);
         System.out.println(" Je Tijd in secondes : " + minutesBetween);
 
